@@ -1,0 +1,45 @@
+---
+// First screen: brand field, H1 (exact text from veon-concept), one sentence, the two cities as call cells,
+// the client's photo cut by the logo's S-curve and crossing the seam between field and paper.
+import { Picture } from "astro:assets";
+import Section from "./Section.astro";
+import { cities } from "../data/clinic";
+import heroPhoto from "../assets/img/procedure-laser.jpg";
+---
+<Section id="hero" class="hero" rec="WEB-R001,WEB-R009,GA-R006,MA-R007">
+  <div class="hero__field">
+    <div class="container hero__grid">
+      <h1 class="hero__title settle" data-rec="WEB-R020" style="--i:0">Лазерна косметологія та дерматологія у Львові й Києві</h1>
+      <p class="hero__lead settle" style="--i:1">Ліцензія та акредитація МОЗ 1-го ступеня, прийом ведуть лікарі, епіляція на лазерах Lumenis.</p>
+      <ul class="hero__cities settle" style="--i:2" aria-label="Зателефонувати в клініку свого міста">
+        {cities.map((c) => (
+          <li>
+            <a class="city-cell" href={c.phones[0].href}>
+              <span class="city-cell__name">{c.name}</span>
+              <span class="city-cell__place">{c.address}</span>
+              <span class="city-cell__phone tnum">{c.phones[0].display}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a class="hero__more settle" style="--i:3" href="#napryamy">
+        <span>Обрати за проблемою</span>
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M8 2v11M3.5 8.5 8 13l4.5-4.5"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="container hero__photo-wrap">
+    <figure class="hero__photo curve-clip">
+      <Picture
+        src={heroPhoto}
+        formats={["avif", "webp"]}
+        widths={[480, 720, 960, 1280]}
+        sizes="(min-width: 60rem) 40vw, 100vw"
+        alt="Лікарка проводить лазерну процедуру на апараті Lumenis M22"
+        loading="eager"
+        fetchpriority="high"
+        class="hero__img"
+      />
+    </figure>
+  </div>
+</Section>

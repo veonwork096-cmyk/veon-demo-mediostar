@@ -1,0 +1,30 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import CallBar from "../components/CallBar.astro";
+import CurveClip from "../components/CurveClip.astro";
+import Napryamy from "../components/Napryamy.astro";
+import Likari from "../components/Likari.astro";
+import Pidkhid from "../components/Pidkhid.astro";
+import Reputatsiya from "../components/Reputatsiya.astro";
+import Kliniky from "../components/Kliniky.astro";
+import Footer from "../components/Footer.astro";
+
+const title = "Mediostar — лазерна косметологія та дерматологія у Львові й Києві";
+const description = "Клініка з ліцензією МОЗ: лазерна епіляція Lumenis, лікування пігментації та акне, HydraFacial, дерматолог. Львів, Городоцька 62; Київ, Максимовича 3Д.";
+---
+<Base lang="uk" title={title} description={description}>
+  <Header slot="header" />
+  <CurveClip />
+  <Hero />
+  <Napryamy />
+  <Likari />
+  <Pidkhid />
+  <Reputatsiya />
+  <Kliniky />
+  <Fragment slot="footer">
+    <Footer />
+    <CallBar />
+  </Fragment>
+</Base>

@@ -1,0 +1,41 @@
+---
+import "@fontsource-variable/piazzolla/opsz.css";
+import "@fontsource-variable/onest/index.css";
+import "../styles/tokens.css";
+import "../styles/global.css";
+import "../styles/site.css";
+import "../styles/sections.css";
+import displayFont from "@fontsource-variable/piazzolla/files/piazzolla-cyrillic-opsz-normal.woff2?url";
+
+interface Props { lang: string; title: string; description: string; canonical?: string; }
+const { lang, title, description, canonical } = Astro.props;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline>document.documentElement.classList.add("js")</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} data-rec="WEB-R020" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#2F4E74" />
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <slot name="head" />
+    <style is:global>
+      html, body { overflow-x: clip; }
+    </style>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">{lang.startsWith("uk") ? "До змісту" : lang.startsWith("ru") ? "К содержанию" : "Skip to content"}</a>
+    <slot name="header" />
+    <main id="main"><slot /></main>
+    <slot name="footer" />
+    <script src="../scripts/reveal.ts"></script>
+    <script src="../scripts/site.ts"></script>
+  </body>
+</html>

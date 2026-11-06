@@ -1,0 +1,40 @@
+---
+// Compact footer on the deep field: mark, future pages as FutureLink, the confirmed Instagram, language.
+import Logo from "./Logo.astro";
+import FutureLink from "./FutureLink.astro";
+import { instagram } from "../data/clinic";
+
+const note = "Розділ у розробці";
+const services = ["Лазерна епіляція", "Лазерна косметологія", "Косметологія обличчя", "Косметологія тіла", "Дерматологія"];
+const pages = ["Ціни", "Акції", "Професійна косметика", "Блог", "Політика конфіденційності"];
+---
+<footer class="site-footer on-field">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a class="site-footer__mark" href="#top" aria-label="Mediostar, на початок сторінки"><Logo /></a>
+      <p class="site-footer__line">Клініка лазерної та естетичної косметології Mediostar</p>
+    </div>
+    <nav class="site-footer__col" aria-label="Напрями">
+      <p class="site-footer__head">Напрями</p>
+      <ul>{services.map((s) => <li><FutureLink note={note} class="site-footer__link">{s}</FutureLink></li>)}</ul>
+    </nav>
+    <nav class="site-footer__col" aria-label="Розділи сайту">
+      <p class="site-footer__head">Клініка</p>
+      <ul>{pages.map((s) => <li><FutureLink note={note} class="site-footer__link">{s}</FutureLink></li>)}</ul>
+    </nav>
+    <div class="site-footer__col">
+      <p class="site-footer__head">Ми в мережі</p>
+      <ul>
+        <li><a class="site-footer__link" href={instagram} rel="noopener">Instagram</a></li>
+      </ul>
+      <p class="site-footer__head site-footer__head--gap">Мова</p>
+      <ul class="site-footer__langs">
+        <li><span class="site-footer__link" aria-current="true">Українська</span></li>
+        <li><FutureLink note={note} class="site-footer__link">English</FutureLink></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__legal">
+    <p>© 2026 Mediostar</p>
+  </div>
+</footer>

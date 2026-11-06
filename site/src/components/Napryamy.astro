@@ -1,0 +1,65 @@
+---
+// Signature 1: the problem-first index. Problem in the display face, answer and device in the text face,
+// published Lviv prices (C-101) only where they exist. Each row leads to a future service page.
+import { Picture } from "astro:assets";
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import { directions, cities } from "../data/clinic";
+import consultPhoto from "../assets/img/consultation.jpg";
+---
+<Section id="napryamy" class="directions" rec="WEB-R004,MA-R009,GA-R007">
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="sec-head__title">Від проблеми до процедури</h2>
+      <p class="sec-head__lead">Почніть із того, що турбує. Процедуру підбере лікар.</p>
+    </div>
+
+    <ol class="index">
+      {directions.map((d) => (
+        <li class="index__row">
+          <h3 class="index__problem">
+            <span class="index__marker" aria-hidden="true"></span>
+            <FutureLink note="Розділ у розробці" class="index__link">{d.problem}</FutureLink>
+          </h3>
+          <div class="index__answer">
+            <p class="index__proc">{d.answer}</p>
+            {d.device && <p class="index__device">{d.device}</p>}
+          </div>
+          {d.price && (
+            <p class="index__price">
+              <span class="index__price-val tnum">{d.price}</span>
+              <span class="index__price-note">{d.priceNote}</span>
+            </p>
+          )}
+        </li>
+      ))}
+    </ol>
+
+    <div class="consult">
+      <figure class="consult__photo">
+        <Picture
+          src={consultPhoto}
+          formats={["avif", "webp"]}
+          widths={[480, 720, 960]}
+          sizes="(min-width: 60rem) 36vw, 100vw"
+          alt="Лікарка консультує пацієнтку в клініці Mediostar"
+          loading="lazy"
+          class="consult__img"
+        />
+      </figure>
+      <div class="consult__text">
+        <p class="consult__title">Не знаєте, що обрати? Почніть з консультації лікаря.</p>
+        <ul class="consult__calls">
+          {cities.map((c) => (
+            <li>
+              <a class="call-row" href={c.phones[0].href}>
+                <span class="call-row__city">{c.name}</span>
+                <span class="call-row__phone tnum">{c.phones[0].display}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</Section>

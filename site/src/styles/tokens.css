@@ -1,0 +1,87 @@
+/* Hallmark · shape: index-first · genre: editorial · theme: custom · job: book · idea: "Покажчик, а не вітрина: від проблеми до лікаря і телефону клініки свого міста" · vibe: "медичний довідник, спокійний, точний, фірмовий синій"
+ * paper: #F5F6F4 · field: #2F4E74 · accent: #4F6E66 · display: Piazzolla · body: Onest · hero: синє поле, H1 і смуга двох міст з телефонами, фото процедури з кривою «S» логотипа · nav: один рядок + вибір міста · footer: field-deep, компактний · imagery: client photos · signature: покажчик проблем крупною антиквою; крива «S» логотипа
+ * axes: light/roman-serif/chromatic-sage · posture: committed · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: imagery, фото рецепції немає серед матеріалів клієнта, тому перший екран несе реальне фото процедури в клініці, а не інтер'єр */
+/* Hallmark · waive 71 · h3.index__problem in the problem index · each problem head sits in its own hairline-ruled table row beside its procedure and price, so the rule groups it, not the gap */
+/* Hallmark · waive 44c · hero photo column at 1440 · the photo is set lower on purpose: concept.md makes it cross the seam between the blue field and the paper below, so its centre sits under the text centre */
+/* Note on WARN 11: portrait scale(1.02) on hover is motion effect 4 approved in concept.md, off under reduced motion and on touch */
+/* Note on WARN 42: footer is field-deep with direction and section columns, required by concept.md (all FutureLink) */
+/* Client design tokens from design/concept.md (veon-concept: colors, fonts). One token system for the whole site. */
+:root {
+  /* Colour: brand field, paper family, ink, sage signal */
+  --color-field: #2F4E74;
+  --color-field-deep: #233C5B;
+  --color-bg: #F5F6F4;
+  --color-paper-2: #E8ECEA;
+  --color-text: #1B2430;
+  --color-muted: #55606B;
+  --color-accent: #4F6E66;
+  --color-accent-on-field: #BFD3CC;
+  --color-accent-ink: var(--color-bg);
+  --color-rule: #C9D1CE;
+  --color-on-field: var(--color-bg);
+  --color-rule-on-field: color-mix(in oklab, var(--color-bg) 26%, var(--color-field));
+  --color-field-hover: color-mix(in oklab, var(--color-bg) 8%, var(--color-field));
+  --color-focus: var(--color-field);
+  --color-focus-on-field: var(--color-accent-on-field);
+  --color-shade: color-mix(in oklab, var(--color-text) 40%, transparent);
+
+  /* Type: Piazzolla (display) + Onest (text), both self-hosted */
+  --font-display: "Piazzolla Variable", Piazzolla, Georgia, serif;
+  --font-body: "Onest Variable", Onest, system-ui, sans-serif;
+  --text-sm: 0.875rem;   /* 14 */
+  --text-md: 1.0625rem;  /* 17 */
+  --text-lg: 1.3125rem;  /* 21 */
+  --text-xl: clamp(1.4rem, 1.2rem + 0.6vw, 1.6875rem);   /* 27 */
+  --text-2xl: clamp(1.6875rem, 1.2rem + 1.6vw, 2.5rem);  /* 40 */
+  --text-3xl: clamp(2.25rem, 1.4rem + 2.8vw, 4rem);      /* 64 */
+  --text-display: clamp(2.125rem, 0.9rem + 4.4vw, 4.75rem);
+  --lh-display: 1.05;
+  --lh-head: 1.2;
+  --lh-body: 1.55;
+
+  /* Space: 4/8 scale */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --space-4xl: 144px;
+  --gutter: 24px;
+  --gap-col: 24px;
+  --space: var(--gutter);
+  --container: 1320px;
+
+  /* Shape */
+  --radius: 4px;
+  --header-h: 56px;
+  --bar-h: 64px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+  --dur: 500ms;
+
+  /* Layers */
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-nav: 300;
+  --z-modal: 400;
+}
+@media (min-width: 48rem) {
+  :root { --gutter: 40px; }
+}
+@media (min-width: 60rem) {
+  :root { --header-h: 64px; --bar-h: 0px; }
+}
+@media (min-width: 80rem) {
+  :root { --gutter: 64px; }
+}

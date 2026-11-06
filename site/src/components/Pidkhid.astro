@@ -1,0 +1,43 @@
+---
+// Medical approach on a tinted well: the licence (B-F019) left, the equipment by purpose (B-F021) right,
+// then the clinic's own device photos on a shelf. The page's single scroll reveal lives here.
+import { Image } from "astro:assets";
+import Section from "./Section.astro";
+import { equipment } from "../data/clinic";
+import m22 from "../assets/img/device-m22.png";
+import lightsheer from "../assets/img/device-lightsheer.png";
+import sciton from "../assets/img/device-sciton.png";
+import hydra from "../assets/img/device-hydrafacial.png";
+
+const shelf = [
+  { src: m22, name: "Lumenis M22" },
+  { src: lightsheer, name: "Lumenis LightSheer Duet" },
+  { src: sciton, name: "Sciton" },
+  { src: hydra, name: "HydraFacial" },
+];
+---
+<Section id="pidkhid" class="approach" rec="WEB-R006">
+  <div class="container approach__grid">
+    <div class="approach__lead">
+      <h2 class="approach__title">Ліцензія та акредитація МОЗ 1-го ступеня</h2>
+      <p class="approach__text">Прийом і процедури ведуть лікарі. Новоутворення оглядають дерматоскопом, інструменти стерилізують в автоклаві.</p>
+      <p class="approach__note">«13 років досвіду» і «більше 15000 задоволених клієнтів» — так клініка пише про себе.</p>
+    </div>
+    <dl class="kit">
+      {equipment.map((g, i) => (
+        <div class="kit__group" data-reveal style={`--i:${i}`}>
+          <dt class="kit__term">{g.group}</dt>
+          {g.items.map((item) => <dd class="kit__item">{item}</dd>)}
+        </div>
+      ))}
+    </dl>
+    <ul class="shelf" aria-label="Апарати клініки">
+      {shelf.map((d) => (
+        <li class="shelf__item">
+          <Image src={d.src} alt="" widths={[d.src.width]} sizes={`${d.src.width}px`} loading="lazy" class="shelf__img" format="webp" />
+          <span class="shelf__name">{d.name}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>

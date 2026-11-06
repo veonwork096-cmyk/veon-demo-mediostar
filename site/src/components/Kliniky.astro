@@ -1,0 +1,51 @@
+---
+// The close: both clinics on the brand field. Address, every phone, messengers, hours, route, the app (C-105).
+import Section from "./Section.astro";
+import { cities, app } from "../data/clinic";
+---
+<Section id="kliniky" class="clinics on-field" rec="WEB-R008,S-R012,GA-R007">
+  <div class="container">
+    <h2 class="clinics__title">Куди прийти і куди зателефонувати</h2>
+    <div class="clinics__grid">
+      {cities.map((c) => (
+        <article class={`clinic clinic--${c.id}`} aria-labelledby={`clinic-${c.id}`}>
+          <h3 class="clinic__city" id={`clinic-${c.id}`}>{c.name}</h3>
+          <p class="clinic__address">{c.address}<span class="clinic__landmark">{c.landmark}</span></p>
+          <a class="clinic__route" href={c.map} rel="noopener" target="_blank">Маршрут на карті<span class="visually-hidden"> (відкриється в новій вкладці)</span></a>
+
+          <ul class="clinic__phones">
+            {c.phones.map((p, i) => (
+              <li><a class:list={["clinic__phone tnum", { "clinic__phone--main": i === 0 }]} href={p.href}>+38 {p.display}</a></li>
+            ))}
+          </ul>
+          <ul class="clinic__links">
+            <li><a href={c.viber}>Viber</a></li>
+            <li><a href={c.telegram} rel="noopener">Telegram</a></li>
+            {c.email && <li><a href={`mailto:${c.email}`}>{c.email}</a></li>}
+          </ul>
+
+          <dl class="clinic__facts">
+            <div>
+              <dt>Графік</dt>
+              {c.hours.map((h) => <dd class="tnum">{h}</dd>)}
+              {c.hoursNote && <dd class="clinic__hint">{c.hoursNote}</dd>}
+            </div>
+            {c.extra && (
+              <div>
+                <dt>Паркінг</dt>
+                <dd>{c.extra}</dd>
+              </div>
+            )}
+          </dl>
+        </article>
+      ))}
+    </div>
+    <div class="clinics__app">
+      <p class="clinics__app-title">Мобільний застосунок Mediostar</p>
+      <ul class="clinics__stores">
+        <li><a href={app.appStore} rel="noopener">App Store</a></li>
+        <li><a href={app.googlePlay} rel="noopener">Google Play</a></li>
+      </ul>
+    </div>
+  </div>
+</Section>

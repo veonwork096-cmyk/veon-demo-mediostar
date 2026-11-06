@@ -1,0 +1,36 @@
+---
+// Phone only: one sticky bar (replaces the two floating widgets of the current site) and the bottom sheet
+// with both clinics. Without JS «Зателефонувати» simply leads to #kliniky.
+import { cities } from "../data/clinic";
+---
+<div class="call-bar" data-rec="WEB-R003,MA-R008" role="region" aria-label="Швидкий зв’язок">
+  <a class="call-bar__main" href="#kliniky" data-open-sheet>
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M6.6 3.5h3l1.5 4.2-2 1.4a12 12 0 0 0 5.8 5.8l1.4-2 4.2 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2Z"/></svg>
+    <span>Зателефонувати</span>
+  </a>
+  <a class="call-bar__side" href="#kliniky">Клініки</a>
+</div>
+
+<dialog class="sheet" id="call-sheet" aria-labelledby="sheet-title">
+  <div class="sheet__inner">
+    <div class="sheet__head">
+      <p class="sheet__title" id="sheet-title">Куди телефонуємо?</p>
+      <button type="button" class="icon-btn sheet__close" data-close-sheet aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path stroke="currentColor" stroke-width="1.6" d="M5 5l14 14M19 5 5 19"/></svg>
+      </button>
+    </div>
+    {cities.map((c) => (
+      <div class="sheet__city">
+        <a class="sheet__main" href={c.phones[0].href}>
+          <span class="sheet__name">{c.name}</span>
+          <span class="sheet__phone tnum">{c.phones[0].display}</span>
+        </a>
+        <p class="sheet__more">
+          {c.phones.slice(1).map((p) => <a class="tnum" href={p.href}>+38 {p.display}</a>)}
+          <a href={c.viber}>Viber</a>
+          <a href={c.telegram} rel="noopener">Telegram</a>
+        </p>
+      </div>
+    ))}
+  </div>
+</dialog>
